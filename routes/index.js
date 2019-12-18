@@ -1,6 +1,9 @@
 const express = require("express");
 const router = express.Router();
+const mongoose = require("mongoose");
 const Post = require("../models/Post");
+const Comment = require("../models/Comment");
+
 
 router.get("/", (req, res) => {
   Post.find().exec((err, posts) => {
@@ -10,10 +13,6 @@ router.get("/", (req, res) => {
 
 router.get("/newpost", (req, res) => {
   res.render("newpost");
-});
-
-router.get("/post/:id", (req, res) => {
-  res.render("post");
 });
 
 router.get("/posts/:id", (req, res) => {
