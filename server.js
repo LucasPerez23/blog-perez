@@ -4,8 +4,8 @@ const router = require ('./routes/index')
 
 //config vars
 
-const port = process.env.port ||3000;
-const db = process.env.mongodb_uri || 'mongodb://localhost/blogPerez';
+const port = process.env.PORT ||3000;
+const db = process.env.MONGODB_URI || 'mongodb://localhost/blogPerez';
 // conectarse a la base de datos
 mongoose.set('useUnifiedTopology', true);
 mongoose.set('useFindAndModify', false);
@@ -17,10 +17,10 @@ mongoose
 .catch(err => console.error(`Connection error ${err}`));
 const app = express();
 app.set ('view engine', 'pug');
-app.set('vistas', '/views');
-app.use ('/', router);
+app.set('views', './views');
 app.use(express.json);
 app.use(express.urlencoded({ extended: false }));
+app.use ('/', router);
 
 app.listen(port,()=>{
   console.log(`Server listening on port ${port}`);

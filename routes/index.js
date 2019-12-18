@@ -1,29 +1,31 @@
-const express = require ('express');
+const express = require("express");
 const router = express.Router();
-const Post =require ('../models/Post');
+const Post = require("../models/Post");
 
-router.get('/', (req, res) =>{
-	Post.find().exec((err, posts) => {
-	res.render('index', {posts: posts});
-	});
+router.get("/", (req, res) => {
+  Post.find().exec((err, posts) => {
+    res.render("index", { posts: posts });
+  });
 });
 
-router.get('/newpost', (req, res) =>{
-	res.render('formulario');
+router.get("/newpost", (req, res) => {
+  res.render("newpost");
 });
 
-router.get('/post/:id', (req, res) =>{
-	res.render('post');
+router.get("/post/:id", (req, res) => {
+  res.render("post");
 });
 
-router.get('/posts/:id', (req, res) => {
-Post.findById(req.params.id).populate('comments').exec((err, post) => {
-	res.render('post', { post: post });
-});
+router.get("/posts/:id", (req, res) => {
+  Post.findById(req.params.id)
+    .populate("comments")
+    .exec((err, post) => {
+      res.render("post", { post: post });
+    });
 });
 
-router.get('/newpost', (req, res) => {
-  res.render('newpost');
+router.get("/newpost", (req, res) => {
+  res.render("newpost");
 });
 
 router.post("/newcomment", (req, res) => {
